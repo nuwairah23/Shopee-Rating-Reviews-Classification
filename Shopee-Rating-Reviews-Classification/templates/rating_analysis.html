@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rating Analysis</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Archivo+Black' rel='stylesheet'>
+</head>
+<body background="static/img/background-other2.png">
+<header>
+	<section class="nav">
+		<ul class="menu">
+			<li><a href="/"><img style="width:45px; height: 45px" src="static/img/home-logo.png" alt="Home"></a></li>
+		</ul>
+		<h1 class="title">Rating Analysis</h1>
+	</section>
+</header>
+<div class="con" style="padding-top:150px">
+    <div class="box-container">
+         <a href="{{url_for('reviews_analysis')}}" ><button style="float:right"> Reviews Analysis</button></a>
+    </div>
+    <div class="box-container" style="margin-top: 50px">
+        <div class="container">
+            <h3 style="color:#9910CE; font-weight:bold; text-align: left">Comparison of Average Rating Trends Across Shops in 2023</h3><br>
+            <p style="font-size:13px; font-weight:600; color:#625C71"><i>Double click on a shop in the legend below the graph to view the analysis specifically for that particular shop</i></p><br><br>
+            <div id="chart" class="chart"></div><br>
+            <div id="chart1" class="chart1"></div><br>
+        </div>
+    </div>
+    <div class="box-container" style="margin-top: 50px">
+        <div class="container">
+            <h3 style="color:#9910CE; font-weight:bold; text-align: left">Comparison of Average Rating Trends Across Shops in 2022</h3><br>
+            <p style="font-size:13px; font-weight:600; color:#625C71"><i>Double click on a shop in the legend below the graph to view the analysis specifically for that particular shop</i></p><br><br>
+            <div id="chart2" class="chart2"></div><br>
+            <div id="chart3" class="chart3"></div><br>
+        </div>
+    </div>
+    <div class="box-container" style="margin-top: 50px">
+        <tab onclick="toggleGraph('chart4')">Grouped Bar Chart</tab>
+        <tab onclick="toggleGraph('chart5')">Stacked Bar Chart</tab>
+        <div class="dash-con" style="height:100%">
+        <div id="chart4" class="chart4"></div><br>
+        <div id="chart5" class="chart5"></div><br>
+        </div>
+    </div>
+    <div class="box-container" style="margin-top: 50px; margin-bottom:100px">
+    <tab onclick="toggleGraph1('chart6')">Line Chart</tab>
+    <tab onclick="toggleGraph1('chart7')">Bar Chart</tab>
+        <div class="dash-con" style=" height:100%">
+            <div id="chart6" class="chart6"></div><br>
+            <div id="chart7" class="chart7"></div><br>
+        </div>
+    </div>
+
+</div>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script type="text/javascript">
+    function toggleGraph(chartId) {
+        if (chartId == 'chart4') {
+            var graph = document.getElementById('chart5');
+            graph.style.display = 'none';
+
+            var graph1 = document.getElementById(chartId);
+            graph1.style.display = 'block';
+        }
+        else {
+            var graph = document.getElementById('chart4');
+            graph.style.display = 'none';
+
+            var graph1 = document.getElementById(chartId);
+            graph1.style.display = 'block';
+        }
+    }
+    function toggleGraph1(chartId) {
+        if (chartId == 'chart6') {
+            var graph = document.getElementById('chart7');
+            graph.style.display = 'none';
+
+            var graph1 = document.getElementById(chartId);
+            graph1.style.display = 'block';
+        }
+        else {
+            var graph = document.getElementById('chart6');
+            graph.style.display = 'none';
+
+            var graph1 = document.getElementById(chartId);
+            graph1.style.display = 'block';
+        }
+    }
+    var graphs = {{graphJSON | safe}};
+    Plotly.plot('chart',graphs,{});
+
+    var graphs1 = {{graphJSON1 | safe}};
+    Plotly.plot('chart1',graphs1,{});
+
+    var graphs2 = {{graphJSON2 | safe}};
+    Plotly.plot('chart2',graphs2,{});
+
+    var graphs3 = {{graphJSON3 | safe}};
+    Plotly.plot('chart3',graphs3,{});
+
+    var graphs4 = {{graphJSON4 | safe}};
+    Plotly.plot('chart4',graphs4,{});
+
+    var graphs5 = {{graphJSON5 | safe}};
+    Plotly.plot('chart5',graphs5,{});
+
+    var graphs6 = {{graphJSON6 | safe}};
+    Plotly.plot('chart6',graphs6,{});
+
+    var graphs7 = {{graphJSON7 | safe}};
+    Plotly.plot('chart7',graphs7,{});
+
+    document.getElementById('chart4').style.display = 'none';
+    document.getElementById('chart6').style.display = 'none';
+
+</script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reviews Analysis</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Archivo+Black' rel='stylesheet'>
+</head>
+<body background="static/img/background-other2.png">
+<header>
+	<section class="nav">
+		<ul class="menu">
+			<li><a href="/"><img style="width:45px; height: 45px" src="static/img/home-logo.png" alt="Home"></a></li>
+		</ul>
+		<h1 class="title">Reviews Analysis</h1>
+	</section>
+</header>
+<div class="con" style="margin-below:10px; padding-top:150px">
+    <div class="box-container">
+        <a href="{{url_for('rating_analysis')}}" style="float:right" ><button> Rating Analysis </button></a><br><br>
+        {% for index, label in enumerate_obj %}
+            <tab onclick="displayWordCloud('{{ wordcloud[index] }}')">{{ label }}</tab>
+        {% endfor %}
+        <div class="container" id="container-wordcloud" style="margin-top:0px; text-align: center"><br>
+            <div id="image"></div>
+        </div>
+    </div>
+    <div class="box-container" style="margin-top: 50px">
+        <tab onclick="toggleGraph2('chart4')">Grouped Bar Chart</tab>
+        <tab onclick="toggleGraph2('chart5')">Stacked Bar Chart</tab>
+        <div class="dash-con" style="padding: 70px;">
+            <div id="chart4" class="chart4"></div>
+            <div id="chart5" class="chart5"></div>
+        </div>
+    </div>
+    <section class="home">
+    <div class="box-container" style="margin-right:5px">
+        <tab style="font-size: 13px" onclick="toggleGraph('chart')">Reviews with Positive Rating</tab>
+        <tab style="font-size: 13px" onclick="toggleGraph('chart1')">Reviews with Negative Rating</tab>
+        <div class="dash-con" style="padding: 30px; height:100%">
+            <h3 style="font-size:15px; color:#9910CE; font-weight:bold; text-align: left">Monthly Analysis on Reviews in 2023</h3><br><br>
+            <div id="chart" class="chart"></div>
+            <div id="chart1" class="chart1"></div>
+        </div>
+    </div>
+    <div class="box-container" style="margin-left:5px">
+        <tab style="font-size: 13px" onclick="toggleGraph1('chart2')">Reviews with Positive Rating</tab>
+        <tab style="font-size: 13px" onclick="toggleGraph1('chart3')">Reviews with Negative Rating</tab>
+        <div class="dash-con" style="padding: 30px; height:100%">
+            <h3 style="font-size:15px; color:#9910CE; font-weight:bold; text-align: left">Monthly Analysis on Reviews in 2022</h3><br><br>
+            <div id="chart2" class="chart2"></div>
+            <div id="chart3" class="chart3"></div>
+        </div>
+    </div>
+    </section>
+</div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script type="text/javascript">
+    function toggleGraph(chartId) {
+        if (chartId == 'chart') {
+            var graph = document.getElementById('chart1');
+            graph.style.display = 'none';
+
+            var graph1 = document.getElementById(chartId);
+            graph1.style.display = 'block';
+        }
+        else {
+            var graph = document.getElementById('chart');
+            graph.style.display = 'none';
+
+            var graph1 = document.getElementById(chartId);
+            graph1.style.display = 'block';
+        }
+    }
+    function toggleGraph1(chartId) {
+        if (chartId == 'chart2') {
+            var graph = document.getElementById('chart3');
+            graph.style.display = 'none';
+
+            var graph1 = document.getElementById(chartId);
+            graph1.style.display = 'block';
+        }
+        else {
+            var graph = document.getElementById('chart2');
+            graph.style.display = 'none';
+
+            var graph1 = document.getElementById(chartId);
+            graph1.style.display = 'block';
+        }
+    }
+
+    function toggleGraph2(chartId) {
+        if (chartId == 'chart4') {
+            var graph = document.getElementById('chart5');
+            graph.style.display = 'none';
+
+            var graph1 = document.getElementById(chartId);
+            graph1.style.display = 'block';
+        }
+        else {
+            var graph = document.getElementById('chart4');
+            graph.style.display = 'none';
+
+            var graph1 = document.getElementById(chartId);
+            graph1.style.display = 'block';
+        }
+    }
+
+    function displayWordCloud(word) {
+        var image = document.createElement('img');
+        image.src = "data:image/png;base64," + word;
+        document.getElementById("image").innerHTML = "";
+        document.getElementById("image").appendChild(image);
+    }
+
+    displayWordCloud('{{ wordcloud[0] }}');
+
+    var graphs = {{graphJSON | safe}};
+    Plotly.plot('chart', graphs, {});
+
+    var graphs1 = {{graphJSON1 | safe}};
+    Plotly.plot('chart1', graphs1, {});
+
+    var graphs2 = {{graphJSON2 | safe}};
+    Plotly.plot('chart2', graphs2, {});
+
+    var graphs3 = {{graphJSON3 | safe}};
+    Plotly.plot('chart3', graphs3, {});
+
+    var graphs4 = {{graphJSON4 | safe}};
+    Plotly.plot('chart4', graphs4, {});
+
+    var graphs5 = {{graphJSON5 | safe}};
+    Plotly.plot('chart5', graphs5, {});
+
+    document.getElementById('chart1').style.display = 'none';
+    document.getElementById('chart3').style.display = 'none';
+    document.getElementById('chart4').style.display = 'none';
+
+
+</script>
+</body>
+</html>

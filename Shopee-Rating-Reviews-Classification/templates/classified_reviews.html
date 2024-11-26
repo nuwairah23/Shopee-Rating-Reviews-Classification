@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Classified Reviews</title>
+	<link rel="stylesheet" href="static/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Archivo+Black' rel='stylesheet'>
+</head>
+<body background="static/img/background-other2.png">
+<header>
+	<section class="nav">
+		<ul class="menu">
+			<li><a href="/"><img style="width:45px; height: 45px" src="static/img/home-logo.png" alt="Home"></a></li>
+		</ul>
+		<h1 class="title">Classified Reviews</h1>
+	</section>
+</header>
+<div class="con">
+<div class="box-container">
+	<a href="{{url_for('recommend')}}" style="float:right" ><button> Recommend </button></a><br><br>
+	{% for index, label in enumerate_obj %}
+		<script>
+			var product_names_{{ index }} = {{ products[index]|tojson }};
+			var rows_{{ index }} = {{ row_list[index] }};
+			var reviews_per_prod_{{ index }} = {{ reviews[index]|tojson }};
+		</script>
+		<tab id="button{{ index }}" value="{{ index }}" onclick="buttonFunction(this.id, product_names_{{ index }}, rows_{{ index }}, reviews_per_prod_{{ index }})">{{ label }}</tab>
+	{% endfor %}
+
+		<div class="container">
+			<h2 id="name" style="color:#9910CE; font-weight:bold"></h2><br>
+			<h3 id="numrows"></h3>
+		</div>
+    	<table>
+		<thead>
+		<tr>
+			<th>Date</th>
+			<th>Username</th>
+			<th>Rating</th>
+            <th>Review</th>
+			<th>Filtered Review</th>
+			<th>Category</th>
+		</tr>
+		</thead>
+		<tbody id="tableBody">
+
+ 		</tbody>
+	</table>
+</div>
+</div>
+<script>
+function buttonFunction(buttonId, products, rows, review) {
+    var button_val = document.getElementById(buttonId).value;
+
+    console.log(button_val);
+    populateTable(review);
+    displayProduct(products, rows);
+
+    // Remove the 'tab-selected' class from all tabs
+    var allTabs = document.querySelectorAll('tab');
+    allTabs.forEach(tab => tab.classList.remove('tab-selected'));
+
+    // Add the 'tab-selected' class to the clicked tab
+    var clickedTab = document.getElementById(buttonId);
+    clickedTab.classList.add('tab-selected');
+}
+
+function displayProduct(products, rows) {
+	var prod =  document.getElementById("name");
+	prod.textContent = products;
+
+	var row =  document.getElementById("numrows");
+	row.innerHTML = "Total Reviews Retrieved: <span id='rows'>" + rows + "</span> rows";
+
+	var rowsElement = document.getElementById("rows");
+	rowsElement.style.color = "#E92670";
+	rowsElement.style.fontSize = "25px";
+}
+function populateTable(reviews) {
+    var tableBody = document.getElementById("tableBody");
+    tableBody.innerHTML = "";
+
+    for (const [date_created, username, rating, review, cleaned, filtered, finalized, sentiment_score, duplicated_spam, product_index, category] of reviews){
+        var row = document.createElement("tr");
+
+        var dateCell = document.createElement("td");
+        dateCell.textContent = date_created;
+        row.appendChild(dateCell);
+
+        var usernameCell = document.createElement("td");
+        usernameCell.textContent = username;
+        row.appendChild(usernameCell);
+
+        var ratingCell = document.createElement("td");
+        ratingCell.textContent = rating;
+        row.appendChild(ratingCell);
+
+        var reviewCell = document.createElement("td");
+        reviewCell.textContent = review;
+        row.appendChild(reviewCell);
+
+        var cleanedReviewCell = document.createElement("td");
+        cleanedReviewCell.textContent = filtered;
+        row.appendChild(cleanedReviewCell);
+
+        var categoryCell = document.createElement("td");
+        categoryCell.textContent = category;
+        row.appendChild(categoryCell);
+
+        tableBody.appendChild(row);
+    }
+}
+var productName = {{products[0]|tojson}};
+var numOfRows = {{row_list[0]}};
+
+displayProduct(productName, numOfRows);
+
+var reviewsData = {{reviews[0]|tojson}};
+populateTable(reviewsData);
+
+</script>
+</body>
+</html>

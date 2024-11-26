@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Recommendation</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Archivo+Black' rel='stylesheet'>
+</head>
+<body background="static/img/background-other2.png">
+<header>
+	<section class="nav">
+		<ul class="menu">
+			<li><a href="/"><img style="width:45px; height: 45px" src="static/img/home-logo.png" alt="Home"></a></li>
+		</ul>
+		<h1 class="title">Recommendation</h1>
+	</section>
+</header>
+<div class="rec">
+    <section class="home">
+        <div class="con-recomm" style="text-align: center; width:350px; height:400px; background: linear-gradient(131deg, rgba(29,170,195,1) 27%, rgba(84,201,226,1) 100%); margin-left:0">
+            <h3 style="color: white; text-align: center">Recommended to buy product from:</h3><br>
+            <h1 style="font-size: 36px; color: white; text-align: center">{{recommend}} </h1><br><br>
+            <h4 style="color: white; text-align: center; font-size:10px">Click here to view and buy product from Shopee</h4><br><br>
+            <a href="{{product_url}}" target="_blank"><button-shop> Buy Product</button-shop></a>
+        </div>
+        <div class="con-recomm" style="text-align: center; width:700px; height:400px; margin-left:0">
+            <h3 style="font-size:20px">Based on the reviews retrieved:</h3><br>
+            <div class="topdashbar">
+                <div class="stathold center-content">
+                    <div class="container-1">
+                    <div class="statrow w-row ">
+                        <div class="column-7 w-col w-col-8 w-col-stack">
+                            <div class="topdashbartext">Number of Useful Reviews</div>
+                            <div class="number topdashbartext">{{useful_review_count}}</div>
+                            <div class="desctext number topdashbartext">reviews</div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="stathold center-content">
+                    <div class="container-2">
+                    <div class="statrow w-row">
+                        <div class="column-8 w-col w-col-8 w-col-stack">
+                            <div class="topdashbartext">Average Rating Based on Useful Reviews</div>
+                            <div class="number topdashbartext">{{mean_rate}}</div>
+                            <div class="desctext number topdashbartext">Out of 5</div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="bottomlaststat laststat stathold center-content">
+                    <div class="container-3">
+                    <div class="statlastbottom statrow w-row">
+                        <div class="column-9 w-col w-col-8 w-col-stack">
+                            <div class="topdashbartext">Number of Reviews in Total:</div>
+                            <div class="number topdashbartext">{{review_count}}</div>
+                            <div class="desctext number topdashbartext">reviews</div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div><br>
+        <section class="home" style="padding: 1rem 5%; float:right; margin-top: 100px">
+            <a style="margin:5px" href="{{url_for('rating_analysis')}}" ><button style="float:right"> Rating Analysis</button></a>
+            <a style="margin:5px" href="{{url_for('reviews_analysis')}}" ><button style="float:right"> Reviews Analysis</button></a>
+        </section>
+        </div>
+    </section>
+
+
+</div>
+</body>
+</html>

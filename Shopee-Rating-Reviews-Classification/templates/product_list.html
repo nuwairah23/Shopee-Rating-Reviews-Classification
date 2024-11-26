@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<title>Product List</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Archivo+Black' rel='stylesheet'>
+</head>
+<body background="static/img/background-other2.png">
+<header>
+	<section class="nav">
+		<ul class="menu">
+			<li><a href="/"><img style="width:45px; height: 45px" src="static/img/home-logo.png" alt="Home"></a></li>
+		</ul>
+		<h1 class="title">Track Product</h1>
+	</section>
+</header>
+<section class="con">
+   <div class="container">
+        <br><p style="text-align:center; size:15px"><b>Please enter a maximum of 6 product links from Shopee</b></p>
+       <div class="search-box">
+           <form class="buttonIn" action="scrape" method="POST">
+               <input id="url" type="text" name="url" placeholder="Enter Shopee product URL...">
+               <input type="submit" value="Search">
+           </form>
+       </div>
+   </div>
+</section>
+{% if product_list %}
+<div class="box-container">
+
+	<a href="{{url_for('review')}}" style="float:right; margin:20px" ><button>View Rating and Reviews</button></a>
+    	<table>
+		<thead>
+		<tr>
+			<th>Product Name</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for product in product_list %}
+		<tr>
+            <td>{{product}}</td>
+		</tr>
+		{% endfor %}
+ 		</tbody>
+	</table>
+</div>
+
+{% endif %}
+</body>
+</html>

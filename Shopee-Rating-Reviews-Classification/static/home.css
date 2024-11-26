@@ -1,0 +1,142 @@
+@charset "ISO-8859-1";
+	body {
+		font-family: Montserrat;
+		height: 100%;
+        margin: 0;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+	}
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+	h1 {
+	    color: white;
+	    font-size: 36px;
+	    margin: 10px;
+	    font-family: Archivo Black;
+	}
+
+
+    ul {
+        list-style: none;
+    }
+
+    section {
+        padding: 2rem 9%;
+    }
+
+    a {
+      float: center;
+	  color: #DD0F88;
+	  text-align: center;
+	  padding: 5px;
+	  text-decoration: none;
+	  font-size: 18px;
+	  line-height: 15px;
+	  border-radius: 0px;
+
+    }
+
+	.title-page{
+	    position:fixed;
+	    width: 100%;
+	    height: 100px;
+	    background-image: url('../static/img/fade-purple2.png');
+	    background-repeat: no-repeat;
+	    background-size: 100% 100%;
+
+	}ul {
+        list-style: none;
+
+
+    }
+
+    section {
+        padding: 2rem 9%;
+    }
+    .nav {
+        position:fixed;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width:100%;
+        height: 65px;
+        padding: 1em;
+    }
+
+    a {
+      float: center;
+	  color: white;
+	  text-align: center;
+	  padding: 5px;
+	  text-decoration: none;
+	  font-size: 18px;
+	  line-height: 15px;
+	  border-radius: 0px;
+
+    }
+
+    .home {
+        display: flex;
+    }
+
+    .menu li:hover {
+        cursor: pointer;
+        transition: 0.3s;
+        transform: scale(1.2);
+    }
+
+    .menu {
+        position: fixed;
+        display: flex;
+        list-style-type: none;
+        flex-direction: row;
+        margin: 0;
+    }
+
+    .menu>li {
+        margin: 0 1rem;
+        overflow: hidden;
+    }
+    .con {
+        padding: 10px;
+	    padding-top: 30px;
+
+	}
+	.container {
+	    text-align:center;
+	    padding: 30px;
+	    margin-left: auto;
+	    margin-right: auto;
+	    margin-top: 80px;
+  		width: 57%;
+	}
+    img {
+      width: 200px;
+      height: 90px;
+    }
+
+    button {
+        font-family: Montserrat;
+        font-weight: bold;
+        color: #100955;
+        text-decoration: none;
+        padding: 15px;
+        background: white;
+        border-color: white;
+        border-style: solid;
+        border-radius: 50px;
+        font-size: 18px;
+        cursor: pointer;
+        transition:  all 0.3s ease 0s;
+    }
+
+    button:hover {
+        background-color: #CAE3FF;
+        color: #0C1190;
+    }
